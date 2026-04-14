@@ -23,4 +23,5 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5007))
     print(f"🚀 Starting Cierge on port {port}")
     print(f"🔑 API Key configured: {'✅' if TAVILY_API_KEY else '❌'}")
+    print("📱 New clean UI design loaded")
     app.run(host="0.0.0.0", port=port, debug=False)
