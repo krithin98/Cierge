@@ -577,75 +577,101 @@ LANDING_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cierge - AI Product Comparison</title>
+    <title>cierge — Stop Overpaying for Your Products</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .header { text-align: center; margin-bottom: 50px; color: white; }
-        .header h1 { font-size: 4rem; font-weight: 700; margin-bottom: 20px; text-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-        .header .tagline { font-size: 1.5rem; opacity: 0.9; margin-bottom: 10px; }
-        .header .powered-by { font-size: 1rem; opacity: 0.7; }
-        .form-card { background: white; padding: 50px; border-radius: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
-        .form-group { margin-bottom: 30px; }
-        .form-group label { display: block; margin-bottom: 12px; font-weight: 600; color: #374151; font-size: 1.2rem; }
-        .form-group input { width: 100%; padding: 18px; border: 3px solid #e5e7eb; border-radius: 15px; font-size: 18px; transition: all 0.3s; }
-        .form-group input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1); transform: translateY(-2px); }
-        .submit-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 40px; border: none; border-radius: 15px; font-size: 20px; font-weight: 700; cursor: pointer; width: 100%; transition: all 0.3s; }
-        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4); }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
-        .feature { background: rgba(255,255,255,0.15); padding: 35px; border-radius: 20px; text-align: center; color: white; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2); }
-        .feature-icon { font-size: 3rem; margin-bottom: 20px; }
-        .feature h3 { margin-bottom: 15px; font-size: 1.4rem; }
-        .feature p { opacity: 0.9; line-height: 1.7; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, Helvetica, sans-serif; color: #333; background: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        
+        .nav { background: #1F3864; padding: 16px 24px; text-align: center; }
+        .nav .logo { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
+        
+        .hero { max-width: 720px; margin: 0 auto; padding: 64px 24px 48px; text-align: center; }
+        .hero h1 { font-size: 36px; line-height: 1.2; color: #1F3864; margin-bottom: 20px; }
+        .hero p { font-size: 18px; color: #555; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .form-section { max-width: 500px; margin: 0 auto 40px; padding: 0 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #1F3864; font-size: 16px; }
+        .form-group input { width: 100%; padding: 16px; border: 2px solid #E0E7EF; border-radius: 8px; font-size: 16px; transition: border-color 0.2s; }
+        .form-group input:focus { outline: none; border-color: #2E75B6; }
+        
+        .cta-btn { display: inline-block; background: #2E75B6; color: #fff; font-size: 18px; font-weight: 700; padding: 16px 40px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.1s; width: 100%; }
+        .cta-btn:hover { background: #245d94; transform: translateY(-1px); }
+        
+        .retailers { text-align: center; padding: 24px; color: #888; font-size: 14px; letter-spacing: 0.3px; }
+        .retailers span { display: inline-block; margin: 0 10px; font-weight: 600; color: #777; }
+        
+        .trust { max-width: 720px; margin: 0 auto; padding: 56px 24px; text-align: center; }
+        .trust h2 { font-size: 26px; color: #1F3864; margin-bottom: 32px; }
+        .trust-grid { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+        .trust-item { flex: 1 1 200px; max-width: 220px; padding: 20px; border: 1px solid #E0E7EF; border-radius: 10px; background: #fff; }
+        .trust-item .icon { font-size: 28px; margin-bottom: 8px; }
+        .trust-item h4 { font-size: 15px; color: #1F3864; margin-bottom: 4px; }
+        .trust-item p { font-size: 13px; color: #777; }
+        
+        .footer { text-align: center; padding: 24px; color: #aaa; font-size: 13px; }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 26px; }
+            .hero p { font-size: 16px; }
+            .cta-btn { font-size: 16px; padding: 14px 28px; }
+            .retailers span { display: block; margin: 4px 0; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🎯 Cierge</h1>
-            <div class="tagline">AI-Powered Product Comparison</div>
-            <div class="powered-by">Powered by Tavily AI • Real-time web search</div>
+    <div class="nav">
+        <div class="logo">cierge</div>
+    </div>
+    
+    <div class="hero">
+        <h1>Stop opening 6 tabs for one purchase. We'll tell you where to actually buy it.</h1>
+        <p>Paste a product link. We compare price, shipping, returns, reviews, and seller trust across major retailers — and give you the best option instantly.</p>
+    </div>
+    
+    <div class="form-section">
+        <form method="POST" action="/compare">
+            <div class="form-group">
+                <label for="product_url">Product URL</label>
+                <input type="url" id="product_url" name="product_url" 
+                       placeholder="https://www.amazon.com/product-name/dp/B123456789/" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" 
+                       placeholder="your@email.com" required>
+            </div>
+            <button type="submit" class="cta-btn">Compare My Product — Free</button>
+        </form>
+    </div>
+    
+    <div class="retailers">
+        We compare across: <span>Amazon</span> <span>Walmart</span> <span>Target</span> <span>eBay</span> <span>Wayfair</span> <span>Etsy</span>
+    </div>
+    
+    <div class="trust">
+        <h2>Why people use cierge</h2>
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="icon">💰</div>
+                <h4>Save real money</h4>
+                <p>The same product can vary $20–$80 across retailers. We find the best total price.</p>
+            </div>
+            <div class="trust-item">
+                <div class="icon">⏱️</div>
+                <h4>Save your time</h4>
+                <p>No more 6 tabs, 6 logins, and 6 different shipping calculators.</p>
+            </div>
+            <div class="trust-item">
+                <div class="icon">🔒</div>
+                <h4>Unbiased picks</h4>
+                <p>We don't earn affiliate commissions. Our recommendation is actually the best one.</p>
+            </div>
         </div>
-        
-        <div class="form-card">
-            <form method="POST" action="/compare">
-                <div class="form-group">
-                    <label for="product_url">🔗 Product URL</label>
-                    <input type="url" id="product_url" name="product_url" 
-                           placeholder="https://www.amazon.com/product-name/dp/B123456789/" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">📧 Email Address</label>
-                    <input type="email" id="email" name="email" 
-                           placeholder="your@email.com" required>
-                </div>
-                <button type="submit" class="submit-btn">🚀 Find Best Deals with AI</button>
-            </form>
-        </div>
-        
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">🧠</div>
-                <h3>AI-Powered Analysis</h3>
-                <p>Advanced AI understands your product and finds intelligent matches, not just keyword searches.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🌐</div>
-                <h3>Web-Wide Search</h3>
-                <p>Searches the entire internet across all retailers. Finds deals you'd never discover manually.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning Fast</h3>
-                <p>Get results in seconds with 180ms response time. No more waiting hours for comparisons.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">✅</div>
-                <h3>Verified Results</h3>
-                <p>Every product link is verified to work. Real prices from real retailers, guaranteed.</p>
-            </div>
-        </div>
+    </div>
+    
+    <div class="footer">
+        © 2026 cierge — Built for smart shoppers.
     </div>
 </body>
 </html>
@@ -657,53 +683,73 @@ RESULTS_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cierge - AI Found Your Best Deals</title>
+    <title>cierge — Your Product Comparison Results</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { color: #1e293b; font-size: 3rem; margin-bottom: 15px; }
-        .header p { color: #64748b; font-size: 1.2rem; }
-        .back-link { display: inline-block; margin-bottom: 30px; color: #667eea; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, Helvetica, sans-serif; color: #333; background: #F7F9FC; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        
+        .nav { background: #1F3864; padding: 16px 24px; text-align: center; }
+        .nav .logo { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .back-link { display: inline-block; margin-bottom: 30px; color: #2E75B6; text-decoration: none; font-weight: 600; }
         .back-link:hover { text-decoration: underline; }
-        .original-product { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 35px; border-radius: 20px; margin-bottom: 40px; text-align: center; }
-        .original-product h2 { margin-bottom: 15px; font-size: 1.8rem; }
-        .original-product p { font-size: 1.1rem; opacity: 0.9; }
-        .results-grid { display: grid; gap: 30px; }
-        .result-card { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-left: 6px solid #667eea; transition: all 0.3s; }
-        .result-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { color: #1F3864; font-size: 28px; margin-bottom: 12px; }
+        .header p { color: #666; font-size: 16px; }
+        
+        .original-product { background: #1F3864; color: white; padding: 32px; border-radius: 10px; margin-bottom: 40px; text-align: center; }
+        .original-product h2 { margin-bottom: 12px; font-size: 22px; }
+        .original-product p { font-size: 16px; opacity: 0.9; }
+        
+        .results-list { display: flex; flex-direction: column; gap: 24px; }
+        .result-card { background: white; padding: 28px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #2E75B6; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
         .rank-retailer { display: flex; align-items: center; }
-        .rank { background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 20px; font-size: 1.2rem; }
-        .retailer { font-size: 1.5rem; font-weight: 700; color: #1e293b; }
-        .price { font-size: 2rem; font-weight: 800; color: #059669; }
-        .product-title { color: #374151; margin-bottom: 15px; font-size: 1.3rem; line-height: 1.6; font-weight: 500; }
-        .relevance-badge { background: #dbeafe; color: #1e40af; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; display: inline-block; margin-bottom: 20px; }
-        .product-snippet { color: #6b7280; margin-bottom: 25px; font-size: 1rem; line-height: 1.7; }
-        .view-btn { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: all 0.3s; }
-        .view-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
-        .no-results { background: white; padding: 60px; border-radius: 20px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .ai-badge { background: #10b981; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; display: inline-block; margin-left: 15px; }
+        .rank { background: #2E75B6; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 16px; font-size: 16px; }
+        .retailer { font-size: 20px; font-weight: 700; color: #1F3864; }
+        .price { font-size: 24px; font-weight: 700; color: #2E75B6; }
+        
+        .product-title { color: #333; margin-bottom: 12px; font-size: 16px; line-height: 1.5; }
+        .match-score { background: #E8F0FE; color: #1F3864; padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; display: inline-block; margin-bottom: 16px; }
+        .product-snippet { color: #666; margin-bottom: 20px; font-size: 14px; }
+        .view-btn { display: inline-block; background: #2E75B6; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.2s; }
+        .view-btn:hover { background: #245d94; }
+        
+        .no-results { background: white; padding: 48px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .no-results h2 { color: #1F3864; margin-bottom: 16px; }
+        .no-results p { color: #666; }
+        
+        .footer { text-align: center; padding: 32px 24px; color: #aaa; font-size: 13px; }
+        
+        @media (max-width: 600px) {
+            .result-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .price { font-size: 20px; }
+        }
     </style>
 </head>
 <body>
+    <div class="nav">
+        <div class="logo">cierge</div>
+    </div>
+    
     <div class="container">
-        <a href="/" class="back-link">← Search Another Product</a>
+        <a href="/" class="back-link">← Compare Another Product</a>
         
         <div class="header">
-            <h1>🎯 Best Deals Found <span class="ai-badge">AI POWERED</span></h1>
-            <p>Our AI searched the entire web and found these alternatives</p>
+            <h1>Your Comparison Results</h1>
+            <p>We found the best options across major retailers</p>
         </div>
         
         <div class="original-product">
-            <h2>📍 Looking for</h2>
+            <h2>Looking for</h2>
             <p><strong>{{ original_product.product_type or original_product.name }}</strong></p>
-            <p>{{ results|length }} alternative{{ 's' if results|length != 1 else '' }} found using AI search</p>
+            <p>{{ results|length }} alternative{{ 's' if results|length != 1 else '' }} found</p>
         </div>
         
         {% if results %}
-        <div class="results-grid">
+        <div class="results-list">
             {% for result in results %}
             <div class="result-card">
                 <div class="result-header">
@@ -711,30 +757,34 @@ RESULTS_TEMPLATE = """
                         <div class="rank">{{ loop.index }}</div>
                         <div class="retailer">{{ result.retailer }}</div>
                     </div>
-                    <div class="price">{{ result.price or 'Call for price' }}</div>
+                    <div class="price">{{ result.price or 'Contact for price' }}</div>
                 </div>
                 
                 <div class="product-title">{{ result.title }}</div>
                 
-                <div class="relevance-badge">{{ "%.0f"|format(result.relevance_score * 100) }}% AI Match</div>
+                <div class="match-score">{{ "%.0f"|format(result.relevance_score * 100) }}% Match</div>
                 
                 {% if result.snippet %}
                 <div class="product-snippet">{{ result.snippet }}...</div>
                 {% endif %}
                 
                 <a href="{{ result.url }}" target="_blank" class="view-btn">
-                    🛒 View at {{ result.retailer }} →
+                    View at {{ result.retailer }} →
                 </a>
             </div>
             {% endfor %}
         </div>
         {% else %}
         <div class="no-results">
-            <h2>🤖 AI Search Complete</h2>
-            <p>Our AI searched the entire web but couldn't find similar products at other retailers.</p>
-            <p style="margin-top: 20px; color: #6b7280;">This might mean the product is exclusive or very unique.</p>
+            <h2>Search Complete</h2>
+            <p>We searched across major retailers but couldn't find similar products at other stores.</p>
+            <p style="margin-top: 16px; color: #888;">This might mean the product is exclusive or very unique.</p>
         </div>
         {% endif %}
+    </div>
+    
+    <div class="footer">
+        © 2026 cierge — Built for smart shoppers.
     </div>
 </body>
 </html>
@@ -746,35 +796,38 @@ PROCESSING_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cierge - AI at Work</title>
+    <title>cierge — Comparing Your Product</title>
     <meta http-equiv="refresh" content="3">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .processing-card { background: white; padding: 70px; border-radius: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.2); text-align: center; max-width: 600px; }
-        .spinner { width: 70px; height: 70px; border: 5px solid #e5e7eb; border-top: 5px solid #667eea; border-radius: 50%; animation: spin 1.2s linear infinite; margin: 0 auto 30px; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, Helvetica, sans-serif; color: #333; background: #F7F9FC; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        
+        .processing-card { background: white; padding: 60px 40px; border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; max-width: 500px; border: 1px solid #E0E7EF; }
+        .spinner { width: 50px; height: 50px; border: 4px solid #E0E7EF; border-top: 4px solid #2E75B6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 24px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        h1 { color: #1e293b; margin-bottom: 20px; font-size: 2.5rem; }
-        .subtitle { color: #64748b; margin-bottom: 30px; font-size: 1.2rem; line-height: 1.6; }
-        .status { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 25px; border-radius: 30px; display: inline-block; font-weight: 600; font-size: 1.1rem; }
-        .ai-info { margin-top: 30px; color: #6b7280; font-size: 0.95rem; }
+        
+        h1 { color: #1F3864; margin-bottom: 16px; font-size: 24px; font-weight: 700; }
+        .subtitle { color: #666; margin-bottom: 24px; font-size: 16px; }
+        .status { background: #2E75B6; color: white; padding: 12px 20px; border-radius: 6px; display: inline-block; font-weight: 600; font-size: 14px; }
+        
+        .progress-info { margin-top: 24px; color: #888; font-size: 13px; }
+        .progress-info p { margin: 4px 0; }
     </style>
 </head>
 <body>
     <div class="processing-card">
         <div class="spinner"></div>
-        <h1>🤖 AI at Work</h1>
+        <h1>Comparing Your Product</h1>
         <div class="subtitle">
-            Our AI is analyzing your product and searching the entire web<br>
-            for the best deals using advanced machine learning.
+            We're checking major retailers for the best deals and options.
         </div>
         
         <div class="status">{{ status }}</div>
         
-        <div class="ai-info">
-            <p>🌐 Searching across thousands of retailers</p>
-            <p>🎯 Using AI to match similar products</p>
-            <p>✅ Verifying all links work</p>
+        <div class="progress-info">
+            <p>Searching across Amazon, Walmart, Target, eBay, and more</p>
+            <p>Comparing prices, shipping, and availability</p>
+            <p>Finding you the best deal</p>
         </div>
     </div>
 </body>
